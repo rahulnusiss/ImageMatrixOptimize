@@ -10,10 +10,10 @@ class FileHandle
         FileHandle();
         virtual ~FileHandle();
     	
-    	void encrypt();
-    	void decrypt();
+    	int encrypt( const int& data, const int& i, const int& j );
+    	int decrypt( const int& data, const int& i, const int& j );
     	vector< vector<int> > loadFile();
-    	void saveFile();
+    	void saveFile( const vector< vector<int> >& iMatrix );
     private:
     	string m_path;
 };

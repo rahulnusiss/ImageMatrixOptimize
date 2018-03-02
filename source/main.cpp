@@ -52,5 +52,8 @@ int main(int argc, char* argv[])
      // e.g 'searchBestMatch 1 3 4 5 5 9' This is default
      else { testObj.testBestMatch(); }
 
+     // Save file
+     filehandler.saveFile( matrix );
+
     return 0;
 }
