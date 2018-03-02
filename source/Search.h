@@ -7,25 +7,34 @@ class Search
 {
     public:
         Search();
-        Search(const vector< vector<int> >& iMatrix);
+        Search(const vector< vector<int> >& iMatrix, const vector<int>& iSeq);
         virtual ~Search();
         // Part 1: The rows with sequence
-        void searchSequence( int seq[], int seq_size );
+        void searchSequence();
 
         // Part 2: Rows with unordered sequence
-        void searchUnordered( int seq[], int seq_size);
+        void searchUnordered();
 
         // Part 3: Rows with closest match
-        void searchBestMatch( int seq[], int seq_size);
+        void searchBestMatch();
+
+
         private:
-        bool searchSequenceSingleArray(const vector<int>& arr, int n, int seq[], int seq_size);
-        bool searchUnorderedSingleArray(const vector<int>& arr, int n, int seq[], int seq_size);
-        int getMatchArray(const vector<int>& arr, int n, int seq[], int seq_size);
+        bool searchSequenceSingleArray(const vector<int>& arr);
+        bool searchUnorderedSingleArray(const vector<int>& arr);
+        int getMatchArray(const vector<int>& arr);
 
         // Attributes
-        vector< vector<int> > m_matrix;
+
+        // Real matrix from file
+        vector< vector<int> > m_matrix;        
         int m_m; // Rows
         int m_n; // Columns
+
+        // Sequence array to be applied search
+        vector<int> m_seq;
+        // Size of seq array or vector
+        int m_seq_size;
   };
 
 #endif // SEARCH_H

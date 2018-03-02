@@ -9,7 +9,9 @@ Search::Search()
     //ctor
 }
 
-Search::Search(const vector< vector<int> >& iMatrix): m_matrix(iMatrix)
+Search::Search(const vector< vector<int> >& iMatrix, const vector<int>& iSeq):
+                 m_matrix(iMatrix),
+                 m_seq(iSeq)
 {
     // Row size from matrix size
     m_m = m_matrix.size();
@@ -18,6 +20,8 @@ Search::Search(const vector< vector<int> >& iMatrix): m_matrix(iMatrix)
         m_n = m_matrix[0].size();
     else
         m_n = 0;
+
+    m_seq_size = m_seq.size();
 
     // To test matrix
     // cout << "Row: " << m_m << endl;
@@ -37,13 +41,13 @@ Search::~Search()
     //dtor
 }
 
-void Search::searchSequence(int seq[], int seq_size)
+void Search::searchSequence()
 {    
     vector<int> list_rows;
 
     for ( int i = 0; i < m_m; ++i)
     {
-        if ( searchSequenceSingleArray(m_matrix[i], m_n, seq, seq_size) )
+        if ( searchSequenceSingleArray(m_matrix[i]))
         {
             list_rows.push_back(i);
         }
@@ -58,12 +62,12 @@ void Search::searchSequence(int seq[], int seq_size)
     }
 }
 
-bool Search::searchSequenceSingleArray(const vector<int>& arr, int n, int seq[], int seq_size)
+bool Search::searchSequenceSingleArray(const vector<int>& arr)
 {
     vector<int> index_vec;
-    for (int j = 0; j < n; ++j)
+    for (int j = 0; j < m_n; ++j)
         {
-            if ( arr[j] == seq[0])
+            if ( arr[j] == m_seq[0])
             {
                 index_vec.push_back(j);
                 //cout << j << " Value: " << arr[j] << endl;
@@ -74,22 +78,22 @@ bool Search::searchSequenceSingleArray(const vector<int>& arr, int n, int seq[],
     {
         int index = *it;
         // if sequence matrix overflows the current matrix then skip
-        if ((n-index) < seq_size) { cout << "overflow" << endl; continue; }
+        if ((m_n-index) < m_seq_size) { cout << "overflow" << endl; continue; }
         //cout << " Index " << index << endl;
         bool flag_current = true;
         int row_current_index = 0;
         int j = 0;
-        for (j = index; j < n ; ++j )
+        for (j = index; j < m_n ; ++j )
         {
             row_current_index = j-index;
-            if ( seq_size <= row_current_index)
+            if ( m_seq_size <= row_current_index)
             {
                 break;
             }
             else{
-                if (arr[j] != seq[row_current_index])
+                if (arr[j] != m_seq[row_current_index])
                 {
-                    //cout << "j-index: " << row_current_index << "--" << seq[row_current_index] << " Check contains " << arr[j] << endl;
+                    //cout << "j-index: " << row_current_index << "--" << m_seq[row_current_index] << " Check contains " << arr[j] << endl;
                     flag_current = false;
                     break;
                 }
@@ -105,14 +109,14 @@ bool Search::searchSequenceSingleArray(const vector<int>& arr, int n, int seq[],
     return false;
 }
 
-void Search::searchBestMatch(int seq[], int seq_size)
+void Search::searchBestMatch()
 {
 
     int bestMatch = 0;
     int row = -1;
     for ( int i = 0; i < m_m; ++i)
     {
-        int current_match = getMatchArray(m_matrix[i], m_n, seq, seq_size);
+        int current_match = getMatchArray(m_matrix[i]);
         if ( bestMatch < current_match)
         {
             bestMatch = current_match;
@@ -125,31 +129,31 @@ void Search::searchBestMatch(int seq[], int seq_size)
 
 }
 
-int Search::getMatchArray(const vector<int>& arr, int n, int seq[], int seq_size)
+int Search::getMatchArray(const vector<int>& arr)
 {
     // For repetetion
     map<int, int> count_map;
-    for (int i = 0; i < seq_size; ++i)
+    for (int i = 0; i < m_seq_size; ++i)
     {
-        if ( count_map.count(seq[i]) )
+        if ( count_map.count(m_seq[i]) )
         {
-            count_map[seq[i]] += 1;
+            count_map[m_seq[i]] += 1;
         }
         else
         {
-            count_map[seq[i]] = 1;
+            count_map[m_seq[i]] = 1;
         }
     }
 
     cout << "  :::::: " << count_map[4] << endl;
 
     int matches = 0;
-    //for (int i = 0; i < seq_size ; ++i)
+    //for (int i = 0; i < m_seq_size ; ++i)
     map<int, int>::iterator it;
     for (it = count_map.begin(); it != count_map.end(); it++)
     {
         int num_counts = 0;
-        for( int j = 0; j < n; ++j)
+        for( int j = 0; j < m_n; ++j)
         {
             if ( it->first == arr[j])
             {
@@ -165,13 +169,13 @@ int Search::getMatchArray(const vector<int>& arr, int n, int seq[], int seq_size
     return matches;
 }
 
-void Search::searchUnordered(int seq[], int seq_size)
+void Search::searchUnordered()
 {
     vector<int> list_rows;
 
     for ( int i = 0; i < m_m; ++i)
     {
-        if ( searchUnorderedSingleArray(m_matrix[i], m_n, seq, seq_size))
+        if ( searchUnorderedSingleArray(m_matrix[i]))
         {
             list_rows.push_back(i);
         }
@@ -186,33 +190,34 @@ void Search::searchUnordered(int seq[], int seq_size)
     }
 }
 
-bool Search::searchUnorderedSingleArray(const vector<int>& arr, int n, int seq[], int seq_size)
+bool Search::searchUnorderedSingleArray(const vector<int>& arr)
 {
     // For repetetion
     map<int, int> count_map;
-    for (int i = 0; i < seq_size; ++i)
+    for (int i = 0; i < m_seq_size; ++i)
     {
-        if ( count_map.count(seq[i]) )
+        if ( count_map.count(m_seq[i]) )
         {
-            count_map[seq[i]] += 1;
+            count_map[m_seq[i]] += 1;
         }
         else
         {
-            count_map[seq[i]] = 1;
+            count_map[m_seq[i]] = 1;
         }
     }
     bool exists = true;
-    for (int i = 0; i < seq_size ; ++i)
+    for (int i = 0; i < m_seq_size ; ++i)
     {
         int current_count = 0;
-        for( int j = 0; j < n; ++j)
+        for( int j = 0; j < m_n; ++j)
         {
-            if ( seq[i] == arr[j])
+            if ( m_seq[i] == arr[j])
             {
                 ++current_count;
             }
         }
-        if (count_map[seq[i]] > current_count)
+        // Check for the total presence of the sequence array number in file matrix
+        if (count_map[m_seq[i]] > current_count)
         {
             exists = false;
             break;
