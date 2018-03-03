@@ -38,17 +38,23 @@ The detailed description of various method is provided in .h files in source.
 	b. to decrypt reverse the logic, subtract 2 if even else subtract 3.
 
 2. Optimize the search function:
+
 	Note: I have used map in which lookup run time is O(log n). It can be **replaced with exactly the same logic by unordered\_map whose lookup run time is O(1)**. I was in doubt that unordered map might throw error in other machines so **in order to avoid conflict with unordered_map, i have used map instead**.
 
-	a. Sequence search: Overall complexity of sequence search is O(n^2). Although first we iterate through the number of appearence of seq[0], where seq[0] is the input sequence matrix. Let this no. of appearence of seq[0], first element in sequence matrix be X. So ideally complexity is O(X*n). Expected complexity should be very less than O(n^2). n is the number of columns in the input 2D matrix from file.
+	a. Sequence search: 
+	Overall complexity of sequence search is O(n^2). Although first we iterate through the number of appearence of seq[0], where seq[0] is the input sequence matrix. Let this no. of appearence of seq[0], first element in sequence matrix be X. So ideally complexity is O(X*n). Expected complexity should be very less than O(n^2). n is the number of columns in the input 2D matrix from file.
 
-	b. Unordered search: For a single row there is only one iteration through sequence array. Let Y be the number of unique elements in sequence array. As we compare the counts from the map so optimized solution time complexity is O(Ylogn) by using map. By using unordered_map complexity is O(Y).
+	b. Unordered search: 
+	For a single row there is only one iteration through sequence array. Let Y be the number of unique elements in sequence array. As we compare the counts from the map so optimized solution time complexity is O(Ylogn) by using map. By using unordered_map complexity is O(Y).
 
-	c. Best Match search: Just like unordered case, we compare the counts from the map, but in this case instead of returning true or false we are calculating total match by adding values of matches from the count of 2 maps. Time complexity is O(Ylogn) by using map. By using unordered_map complexity is O(Y).
+	c. Best Match search: 
+	Just like unordered case, we compare the counts from the map, but in this case instead of returning true or false we are calculating total match by adding values of matches from the count of 2 maps. Time complexity is O(Ylogn) by using map. By using unordered_map complexity is O(Y).
 
 3. Design choices:
 	a. Vector < Vector < int >> for dynamic array of input matrix file.
+
 	b. map < int, int> to take counts of elements from sequence array as well as each row arrays from 2D matrix for faster processing.
+
 	c. Design class and sequence diagram is shown. There is association between TestSearch and Search class as TestSearch class has to call the search algorithm for same matrix data file repeatedly.
 
 4. To add more search functions, we can do it in Search class. This will give us the ability to run that search function on the same 2D matrix data.
