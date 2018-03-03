@@ -34,7 +34,9 @@ The detailed description of various method is provided in .h files in source.
 
 ## Other requirements
 1. **Matrix sensitive information**: There is provision of encryption and decryption using encrypt and decrypt function in FileHandle Class. Encryption is done as follows:
+
 	a. If ith + jth position of element in matrix is even then add +2 to the element, else add +3 to the element.
+
 	b. to decrypt reverse the logic, subtract 2 if even else subtract 3.
 
 2. **Optimize the search function**:
@@ -42,7 +44,7 @@ The detailed description of various method is provided in .h files in source.
 	Note: I have used map in which lookup run time is O(log n). It can be **replaced with exactly the same logic by unordered\_map whose lookup run time is O(1)**. I was in doubt that unordered map might throw error in other machines so **in order to avoid conflict with unordered_map, i have used map instead**.
 
 	a. ***Sequence search***: 
-	Overall complexity of sequence search is O(n^2). Although first we iterate through the number of appearence of seq[0], where seq[0] is the input sequence matrix. Let this no. of appearence of seq[0], first element in sequence matrix be X. So ideally complexity is O(X*n). Expected complexity should be very less than O(n^2). n is the number of columns in the input 2D matrix from file.
+	Overall complexity of sequence search is O(n^2). Although first we iterate through the number of appearence of seq[0], where seq is the input sequence matrix. Let this no. of appearence of seq[0] ( first element in sequence matrix ) in row array, be X. So ideally complexity is O(X*n). Expected complexity should be very less than O(n^2). n is the number of columns in the input 2D matrix from file.
 
 	b. ***Unordered search***: 
 	For a single row there is only one iteration through sequence array. Let Y be the number of unique elements in sequence array. As we compare the counts from the map so optimized solution time complexity is O(Ylogn) by using map. By using unordered_map complexity is O(Y).
@@ -58,7 +60,7 @@ The detailed description of various method is provided in .h files in source.
 
 	c. Design class and sequence diagram is shown. There is association between TestSearch and Search class as TestSearch class has to call the search algorithm for same matrix data file repeatedly.
 
-4. ***To add more search functions***, we can do it in Search class. This will give us the ability to run that search function on the same 2D matrix data.
+4. **To add more search functions**, we can do it in Search class. This will give us the ability to run that search function on the same 2D matrix data.
 
 5. **Varying matrix dimension**: As the dimension of matrix is handled dynamically, so changes in number of rows and columns is handled by nested vector.
 
