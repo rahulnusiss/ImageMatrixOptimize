@@ -1,7 +1,13 @@
 #ifndef TESTSEARCH_H
 #define TESTSEARCH_H
 
-#include "Search.h"
+#include "ISearch.h"
+#include <vector>
+#include <map>
+using namespace std;
+
+typedef map<string, ISearch * > map_type;
+
 
 class TestSearch
 {
@@ -10,34 +16,43 @@ class TestSearch
     	* Constructor
     	*/
     	TestSearch();
-    	/**
-    	* Parameterised Constructor
-    	* iSearch: Input search class object on which tests to be performed.
-    	*/
-        TestSearch(const Search& iSearch);
+    	
         /**
     	* Destructor
     	*/
         virtual ~TestSearch();
 
         /**
-        * Function to test search type 1: Sequence search
+        * Actual function to test search type.
+        * iSeq: Sequence matrix for searching
+        * iStrArg: Search Type
         */
-        void testSequence();
+        void testSearch(const vector<int>& iSeq, const string& iStrArg);
 
         /**
-        * Function to test search type 2: Unordered search
+        * To set the original matrix for test.
+        * iMatrix: Input 2D matrix
         */
-        void testUnordered();
+
+        void setMatrix(const vector< vector<int> >& iMatrix);
 
         /**
-        * Function to test search type 3: Best Match search
+        * To perform benchmarking on randomn matrix values, repeatedly. Calculate average of all times.
+        * iSeq: Input args sequence matrix
+        * iStrArg: Search Type
+        * iter: No. of iterations for benchmarking, default = 1000
         */
-        void testBestMatch();    
+
+        void benchMark(const vector<int>& iSeq, const string& iStrArg, int iter = 1000);
 
     private:
     	// Search object which has implementation of the three type of search
-    	Search m_search;
+    	ISearch* m_search;
+
+        // To map search type with its object
+        map_type m_search_type_map;
+        // Original Matrix
+        vector< vector<int> > m_original_matrix;
 };
 
 #endif // TESTSEARCH_H

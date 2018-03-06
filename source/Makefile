@@ -1,18 +1,30 @@
 
-output: main.o Search.o TestSearch.o FileHandle.o
-	g++ main.o Search.o TestSearch.o FileHandle.o -o output.out
+output: main.o TestSearch.o FileHandle.o Sequence.o Unordered.o BestMatch.o Utils.o
+	g++ -std=c++11 main.o TestSearch.o FileHandle.o Sequence.o Unordered.o BestMatch.o Utils.o -o output.out
 
 main.o: main.cpp
-	g++ -c main.cpp
+	g++ -std=c++11 -c main.cpp
 
-Search.o: Search.cpp Search.h
-	g++ -c Search.cpp
+ISearch.o: ISearch.h
+	g++ -std=c++11 -c ISearch.h
+
+Sequence.o: Sequence.h Sequence.cpp
+	g++ -std=c++11 -c Sequence.cpp
+
+Unordered.o: Unordered.h Unordered.cpp
+	g++ -std=c++11 -c Unordered.cpp
+
+BestMatch.o: BestMatch.h BestMatch.cpp
+	g++ -std=c++11 -c BestMatch.cpp
 
 TestSearch.o: TestSearch.cpp TestSearch.h
-	g++ -c TestSearch.cpp
+	g++ -std=c++11 -c TestSearch.cpp
 
 FileHandle.o: FileHandle.cpp FileHandle.h
-	g++ -c FileHandle.cpp
+	g++ -std=c++11 -c FileHandle.cpp
+
+Utils.o: Utils.cpp Utils.h
+	g++ -std=c++11 -c Utils.cpp
 
 clean:
 	rm *.o output

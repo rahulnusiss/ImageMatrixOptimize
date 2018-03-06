@@ -1,12 +1,12 @@
-#include "Search.h"
+#include "ISearch.h"
 #include <iostream>
 #include "TestSearch.h"
 #include "FileHandle.h"
+#include <chrono>
 #include <sstream>
 #include <vector>
 using namespace std;
 
-// g++ main.cpp Search.cpp Search.h
 int main(int argc, char* argv[])
 {
     // Sequence array: The input array from the argument. It is the array from the argument.
@@ -43,17 +43,12 @@ int main(int argc, char* argv[])
 	 vector< vector<int> > matrix;    
      FileHandle filehandler;
      matrix = filehandler.loadFile();
-     Search obj2(matrix, sequence);
-     TestSearch testObj(obj2);
-     if (0 == searchType.compare("searchSequence")) { testObj.testSequence(); }        
+    
+     TestSearch testObj;
+     testObj.setMatrix(matrix);
 
-     else if ( 0 == searchType.compare("searchUnordered")) { testObj.testUnordered(); }
-
-     // e.g 'searchBestMatch 1 3 4 5 5 9' This is default
-     else { testObj.testBestMatch(); }
-
-     // Save file
-     filehandler.saveFile( matrix );
-
+     //std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now() ;
+     testObj.benchMark(sequence, searchType, 1000);
+     //testObj.testSearch(sequence, searchType);
     return 0;
 }

@@ -1,6 +1,6 @@
-Note: The input argument array is considered as sequence array.
 
-Brute Force:   
+Brute Force:
+    The input argument array is my sequence array.
 
     1. Sequence: 
         a. 2D array as vector of vector.
@@ -32,15 +32,15 @@ Brute Force:
     Optimized:
 
         1. Sequence:
-            a. Same. Complexity is O(X * n ). n = number of columns in 2D matrix, X = no. of seq[0](first element of sequence array) in row array of 2D matrix.
+            a. Store sequence in Map of Map. If there was no repetetion, there was no need of nested map.
 
         2. Unordered:
             a. Take the counts of each unique number from both the arrays in separate maps.
             b. Compare counts from both the maps. If all counts in map_sequence is less than the counts in map_matrix_row, then return true.
-            c. The complexity in this case would be O(3*n) ~ O(n) for unordered_map. For map its O(nlogn).
+            c. The complexity in this case would be O(3*n) ~ O(n).
 
         3. Best match.
             a. Like unordered case take counts in two maps.
             b. Calculate total matches by adding the common counts value.
             c. The common counts value would be the count whose value is less.
-            d. The complexity would be O(3*n) ~ O(n) for unordered_map. For map its O(nlogn).
+            d. The complexity would be O(3*n) ~ O(n).
