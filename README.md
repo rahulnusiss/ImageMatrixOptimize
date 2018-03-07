@@ -6,7 +6,7 @@
 
 ## Class Diagram
 <div align="center">
-	<img src="https://github.com/rahulnusiss/NetVirta_Assessment/blob/master/image/Restructured_design_class_diagram.png?raw=true" width="1000" height="800"/><br><br>
+	<img src="https://github.com/rahulnusiss/NetVirta_Assessment/blob/master/image/Restructured_design_class.png?raw=true" width="1000" height="800"/><br><br>
 </div>
 
 Assumption: Main is the entry point function not the class.
