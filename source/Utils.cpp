@@ -21,7 +21,7 @@ void Utils::displayMatrix(const vector< vector<int> >& iMatrix){
 }
 
 // Returns a map with key as elements and value as their counts in arr.
-void Utils::getCountMap( const vector<int>& arr, int size, map<int, int>& count_map)
+void Utils::getCountMap( const vector<int>& arr,const int& size, map<int, int>& count_map)
 {
     // map<int, int> count_map;
     for (int i = 0; i < size; ++i)

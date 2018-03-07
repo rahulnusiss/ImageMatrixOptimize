@@ -13,18 +13,18 @@ class Sequence: public ISearch
         * Constructor
         */
         Sequence();
-        /**
-        * Parameterized Constructor
-        * iMatrix: input 2D matrix
-        * iSeq: input array from arguments on which search algorithm is applied
-        */
-        // Sequence(const vector< vector<int> >& iMatrix, const vector<int>& iSeq);
-        void setMatrices(const vector< vector<int> >& iMatrix, const vector<int>& iSeq);
-
+        
         /**
         * Destructor
         */
         virtual ~Sequence();
+
+        /**
+        * To set the matrix
+        * iMatrix: input 2D matrix
+        * iSeq: input array from arguments on which search algorithm is applied
+        */        
+        void setMatrices(const vector< vector<int> >& iMatrix, const vector<int>& iSeq);
 
         /**
         * Search function implementation for sequence

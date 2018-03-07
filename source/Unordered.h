@@ -12,18 +12,19 @@ class Unordered: public ISearch
         /**
         * Constructor
         */
-        Unordered();
+        Unordered();        
+
+        /**
+        * Destructor
+        */
+        virtual ~Unordered();
+
         /**
         * To set the 2D matrix
         * iMatrix: input 2D matrix
         * iSeq: input array from arguments on which search algorithm is applied
         */        
         void setMatrices(const vector< vector<int> >& iMatrix, const vector<int>& iSeq);
-
-        /**
-        * Destructor
-        */
-        virtual ~Unordered();
 
         /**
         * Search function implementation for Unordered

@@ -13,17 +13,18 @@ class BestMatch: public ISearch
         * Constructor
         */
         BestMatch();
-        /**
-        * Set class attributes to be used for search
-        * iMatrix: input 2D matrix
-        * iSeq: input array from arguments on which search algorithm is applied
-        */
-        void setMatrices(const vector< vector<int> >& iMatrix, const vector<int>& iSeq);
 
         /**
         * Destructor
         */
         virtual ~BestMatch();
+
+         /**
+        * Set class attributes to be used for search
+        * iMatrix: input 2D matrix
+        * iSeq: input array from arguments on which search algorithm is applied
+        */
+        void setMatrices(const vector< vector<int> >& iMatrix, const vector<int>& iSeq);
 
         /**
         * Search function implementation for sequence

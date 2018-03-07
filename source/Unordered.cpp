@@ -32,8 +32,8 @@ void Unordered::setMatrices(const vector< vector<int> >& iMatrix, const vector<i
     m_seq_size = m_seq.size();
 
     // Display before sorting
-    // m_util->displayMatrix(m_matrix);
-    cout << "----------------------------------------------" << endl << endl;
+    m_util->displayMatrix(m_matrix);
+    //cout << "----------------------------------------------" << endl;
 
     for (int i = 0; i < m_m; ++i){
         m_util->mergeSort(m_matrix[i], 0, m_n-1);

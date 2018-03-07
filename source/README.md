@@ -32,15 +32,14 @@ Brute Force:
     Optimized:
 
         1. Sequence:
-            a. Store sequence in Map of Map. If there was no repetetion, there was no need of nested map.
+            a. Same. O(n). Cannot apply sorting as it will change the order. To optimize once sequence is found we break out.
 
         2. Unordered:
-            a. Take the counts of each unique number from both the arrays in separate maps.
-            b. Compare counts from both the maps. If all counts in map_sequence is less than the counts in map_matrix_row, then return true.
-            c. The complexity in this case would be O(3*n) ~ O(n).
+            a. Sort the matrix rows.            
+            b. Compare counts from both row of matrix and sequence array. Count from matrix is calculated using divide and conquer technique.
+            c. The complexity in this case would be O(logn).
 
         3. Best match.
-            a. Like unordered case take counts in two maps.
-            b. Calculate total matches by adding the common counts value.
-            c. The common counts value would be the count whose value is less.
-            d. The complexity would be O(3*n) ~ O(n).
+            a. Sort the matrix rows.            
+            b. Compare counts from both row of matrix and sequence array. Count from matrix is calculated using divide and conquer technique. Add the lower count in each case. As sequence size is constant, we go through each elemnt of sequence matrix only.
+            c. The complexity in this case would be O(logn).

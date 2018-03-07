@@ -24,6 +24,9 @@ void Sequence::setMatrices(const vector< vector<int> >& iMatrix, const vector<in
         m_n = 0;
 
     m_seq_size = m_seq.size();
+
+    // Display 2D matrix
+    m_util->displayMatrix(m_matrix);
     
 }
 

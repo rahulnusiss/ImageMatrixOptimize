@@ -52,7 +52,7 @@ public:
     * size: size of input array.
     * count_map: output a map with key as elements and value as their counts in arr.
     */
-    void getCountMap( const vector<int>& arr, int size, map<int, int>& count_map);
+    void getCountMap( const vector<int>& arr, const int& size, map<int, int>& count_map);
 
 };
 
