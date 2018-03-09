@@ -31,12 +31,31 @@ void Unordered::setMatrices(const vector< vector<int> >& iMatrix, const vector<i
 
     m_seq_size = m_seq.size();
 
+    m_size_1D = m_m*m_n;    
+
     // Display before sorting
-    m_util->displayMatrix(m_matrix);
+    //m_util->displayMatrix(m_matrix);
     //cout << "----------------------------------------------" << endl;
 
     for (int i = 0; i < m_m; ++i){
         m_util->mergeSort(m_matrix[i], 0, m_n-1);
+    }
+
+    for (int i = 0; i < m_m; ++i)
+    {
+        for (int j =0; j < m_n; ++j)
+        {
+            m_matrix_1D.push_back(m_matrix[i][j]);    
+        }        
+    }
+
+    // Display 1D matrix
+    for (long int i = 0; i < m_size_1D; ++i)
+    {
+        cout << m_matrix_1D[i] << " ";
+        if((i+1)%m_n == 0){
+            cout << endl;
+        }
     }
     
     // Display after sorting
@@ -49,9 +68,18 @@ void Unordered::search()
     // To store all the rows with matching sequence
     vector<int> list_rows;
 
+    map<int, int> count_map_seq;
+    m_util->getCountMap( m_seq, m_seq_size, count_map_seq );
+    int first = 0;
+    int last = -1;
+
     for ( int i = 0; i < m_m; ++i)
     {
-        if ( searchUnorderedSingleArray(m_matrix[i]))
+        first = last+1;
+        last = (i+1)*m_n - 1 ;
+        //cout << "First: " << first;
+        //cout << "  Last: " << last << endl;
+        if ( searchUnorderedSingleArray(count_map_seq, first, last) )
         {
             list_rows.push_back(i);
         }
@@ -66,26 +94,25 @@ void Unordered::search()
     }
 }
 
-bool Unordered::searchUnorderedSingleArray(const vector<int>& arr)
+bool Unordered::searchUnorderedSingleArray(const map<int, int>& count_map_seq, const int& first, const int& last)
 {
-    // Get elements(key) , their counts(value) of sequence array
-    map<int, int> count_map_seq;
-    m_util->getCountMap( m_seq, m_seq_size, count_map_seq );
+    // Get elements(key) , their counts(value) of sequence array    
     // Get elements(key) , their counts(value) of ith row array from file
     //map<int, int> count_map_arr = getCountMap( arr, m_n );    
     bool exists = true;
     // for (int i = 0; i < m_seq_size ; ++i)
-    map<int, int>::iterator it;
-    for (it = count_map_seq.begin(); it != count_map_seq.end(); it++)    {   
+    map<int, int>::const_iterator it;
+    for (it = count_map_seq.begin(); it != count_map_seq.end(); it++)    
+    {   
         int element = it->first;
         // count of this element in row arr from 2D matrix.
         // int current_count = count_map_arr[element];                        
         int num_count = 0;
-        int idx_low = m_util->lowerIndex(arr, 0, m_n-1, element, m_n);
+        int idx_low = m_util->lowerIndex(m_matrix_1D, first, last, element, first);
         if ( -1 != idx_low )
         {
             // Number exist
-            num_count = m_util->upperIndex(arr, 0, m_n-1, element, m_n) - idx_low + 1;
+            num_count = m_util->upperIndex(m_matrix_1D, first, last, element, last+1) - idx_low + 1;
         }
 
         // Check for the total presence of the sequence array number in current row array of file.

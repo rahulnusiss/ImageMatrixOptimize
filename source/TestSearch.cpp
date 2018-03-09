@@ -57,10 +57,10 @@ void TestSearch::benchMark(const vector<int>& iSeq, const string& iStrArg, int i
     for ( int t = 0; t < iter; ++t)
     {
         vector< vector<int> > matrix_benchmark;
-        for (int i =0; i < 50; ++i)
+        for (int i =0; i < 10; ++i)
         {
             vector<int> temp;
-            for ( int j =0; j < 50; ++j)
+            for ( int j =0; j < 1000; ++j)
             {
                 // Random number = num
                 int num = rng();

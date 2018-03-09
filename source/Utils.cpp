@@ -105,51 +105,51 @@ void Utils::mergeSort(vector<int>& arr, int low, int high){
 }
 
 // Divide and Conquer
-int Utils::lowerIndex(const vector<int> & arr, int low, int high, int num, int size)
+int Utils::lowerIndex(const vector<int> & arr, int low, int high, int num, int first)
 {
   if(high >= low)
   {
     int mid = low + ((high - low)/2);
     // If different number found or index 0
-    if( ( mid == 0 || num > arr[mid-1]) && arr[mid] == num)
+    if( ( mid == first || num > arr[mid-1]) && arr[mid] == num)
     {
       return mid;
     }
     // if num > arr[mid] search in upper half
     else if(num > arr[mid])
     {     
-      return lowerIndex(arr, (mid + 1), high, num, size);
+      return lowerIndex(arr, (mid + 1), high, num, first);
     }
     // if num < arr[mid] search in lower half
     else
     {
-      return lowerIndex(arr, low, (mid -1), num, size);
+      return lowerIndex(arr, low, (mid -1), num, first);
     }
   }
   return -1;    // Not found code
 }
 
 // Divide and conquer
-int Utils::upperIndex(const vector<int>& arr, int low, int high, int num, int size)
+int Utils::upperIndex(const vector<int>& arr, int low, int high, int num, int last)
 {
 
   if(high >= low)
   {
     int mid = low + ((high - low)/2);
     // If different number found or index is last
-    if( ( mid == size-1 || num < arr[mid+1]) && arr[mid] == num )
+    if( ( mid == last-1 || num < arr[mid+1]) && arr[mid] == num )
     {
       return mid;
     }
     // If num < arr[mid] search lower half
     else if(num < arr[mid])
     {
-      return upperIndex(arr, low, (mid -1), num, size);
+      return upperIndex(arr, low, (mid -1), num, last);
     }
     // If num > arr[mid] search upper half
     else
     {
-      return upperIndex(arr, (mid + 1), high, num, size);      
+      return upperIndex(arr, (mid + 1), high, num, last);      
     }
   }
   return -1;    // Not found code

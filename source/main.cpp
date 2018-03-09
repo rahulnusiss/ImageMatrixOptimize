@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
      testObj.setMatrix(matrix);
 
      //std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now() ;
-     testObj.benchMark(sequence, searchType, 1000);
+     testObj.benchMark(sequence, searchType, 100);
      //testObj.testSearch(sequence, searchType);
     return 0;
 }

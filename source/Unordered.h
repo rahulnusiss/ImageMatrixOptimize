@@ -34,10 +34,9 @@ class Unordered: public ISearch
     private:
         /**
         * Function to apply algorithm 2 on a single row from 2D matrix from file.
-        * arr: Input array to be searched for all required numbers of sequence array.
-        * return: true if arr has all the required numbers, else false.
+        * 
         */
-        bool searchUnorderedSingleArray(const vector<int>& arr);
+        bool searchUnorderedSingleArray(const map<int, int>& count_map_seq, const int& first, const int& last);
 
         
 
@@ -54,6 +53,10 @@ class Unordered: public ISearch
 
         // For utilities
         Utils* m_util;
+
+        // Single matrix
+        vector<int> m_matrix_1D;
+        long int m_size_1D;
 
 };
 
