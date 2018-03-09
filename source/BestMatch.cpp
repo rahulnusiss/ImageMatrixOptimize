@@ -46,12 +46,14 @@ void BestMatch::setMatrices(const vector< vector<int> >& iMatrix, const vector<i
 
 void BestMatch::search()
 {
+    map<int, int> count_map_seq; 
+    m_util->getCountMap(m_seq, m_seq_size, count_map_seq);
 
     int bestMatch = 0;
     int row = -1;
     for ( int i = 0; i < m_m; ++i)
     {
-        int current_match = getMatchArray(m_matrix[i]);
+        int current_match = getMatchArray(m_matrix[i], count_map_seq);
         if ( bestMatch < current_match)
         {
             bestMatch = current_match;
@@ -69,15 +71,13 @@ void BestMatch::search()
 
 }
 
-int BestMatch::getMatchArray(const vector<int>& arr)
+int BestMatch::getMatchArray(const vector<int>& arr, const map<int, int>& count_map_seq)
 {    
-    map<int, int> count_map_seq; 
-    m_util->getCountMap(m_seq, m_seq_size, count_map_seq);
     //map<int, int> count_map_arr = getCountMap( arr, m_n);
 
     int matches = 0;
     //for (int i = 0; i < m_seq_size ; ++i)
-    map<int, int>::iterator it;
+    map<int, int>::const_iterator it;
     for (it = count_map_seq.begin(); it != count_map_seq.end(); it++)
     {
         

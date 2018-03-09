@@ -34,7 +34,7 @@ class BestMatch: public ISearch
 
     private:
 
-        int getMatchArray(const vector<int>& arr);
+        int getMatchArray(const vector<int>& arr, const map<int, int>& count_map_seq);
 
 
         // Attributes
